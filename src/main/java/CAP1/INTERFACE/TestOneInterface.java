@@ -9,7 +9,7 @@ interface TestOneI{
 }
 
 interface TestTwoI {
-    default String returnValue(){
+    public default String returnValue(){
         return "TestOneInterface";
     }
 }

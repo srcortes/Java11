@@ -15,6 +15,8 @@ public class TestOneStaticClass {
     public static class Inner extends TestStaticInnerClassExtends implements TestStaticInnerClass{
       int valueInner = value;
       static String otherValue = "value from Inner static class";
+
+
     }
 
     public static void main(String[] args) {
