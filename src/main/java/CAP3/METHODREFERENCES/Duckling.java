@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 interface getObject{
     Duckling getDuckling(String sound);
@@ -73,11 +72,11 @@ public class Duckling {
         /*VerifyFirtLetter verifyFirtLetter = value::startsWith;
         boolean responde = verifyFirtLetter.startWithValue("j");*/
 
-        Function<String, Boolean> function = value::startsWith;
-        boolean responde = function.apply("j");
+        /*Function<String, Boolean> function = value::startsWith;
+        boolean responde = function.apply("j");*/
 
-        Consumer<Boolean> consumer1 = System.out::println;
-        consumer1.accept(responde);
+        /*Consumer<Boolean> consumer1 = System.out::println;
+        consumer1.accept(responde);*/
 
     }
 }
