@@ -1,37 +1,20 @@
 package CAP1.FINALMODIFIER;
 
-class TestFinalModifier{
-    final String prueba(){
-        return null;
-    }
-}
-
-class TestFinalModifierExtends extends TestFinalModifier{
-    String prueba(String a){
-        return "A";
-    }
-}
-
 /**
- *
+ * Here we have a class for learning final  modifier
  */
 public class PolarBear {
     final int age = 10;
     final int fishEaten;
     final String name;
-    final static String lastName;
-    static String code;
 
-    {
-        fishEaten = 10;
-    }
-
-    static{
-        lastName = "rodriguez";
-    }
+    {fishEaten = 10;}
 
     public PolarBear(){
-        name = "John";
+        name = "Robert";
+    }
 
+    public PolarBear(int height){
+        this();
     }
 }

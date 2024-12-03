@@ -2,17 +2,15 @@ package CAP1.NESTED_CLASSES.INNERCLASS;
 
 import java.util.function.Supplier;
 
-public class TestExtendInnerClass extends Outer.Inner{
+public class TestExtendInnerClass extends IneerClassExampleOne.InnerExample{
 
-    public TestExtendInnerClass(Outer outer){
+    public TestExtendInnerClass(IneerClassExampleOne outer){
         outer.super();
     }
 
     public static void main(String[] args) {
-        Supplier<Outer> outerSupplier = Outer::new;
-        TestExtendInnerClass t = new TestExtendInnerClass(outerSupplier.get());
-        String valeu = t.k;
-        System.out.println(valeu);
-
+        IneerClassExampleOne ineerClassExampleOne = new IneerClassExampleOne();
+        TestExtendInnerClass testExtendInnerClass = new TestExtendInnerClass(ineerClassExampleOne);
+        System.out.println(testExtendInnerClass.repeat);
     }
 }

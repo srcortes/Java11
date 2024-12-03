@@ -16,6 +16,7 @@ public class PrintNumbers {
         final int widtth = 20;
         int h = 50;
 
+
         class myLocalClass implements IFunc{
             final static int j = 5;
 

@@ -1,28 +1,15 @@
 package CAP1.ENUM;
 
 public enum SeasonTwo {
-    WINTER{
-        @Override
-        public String getValue(){
-            return "8am";
-        }
-    },SUMMER{
-        @Override
-        public String getValue(){
-            return "12pm";
-        }
-    }, FALL{
-        @Override
-        public String getValue() {
-            return "5pm";
-        }
-    },SPRING{
-        @Override
-        public String getValue() {
-            return null;
-        }
-    };
+   WINTER("Low"), SPRING("Medium"), SUMMER("High"), FALL("Medium");
 
+   private final String expectedVisitor;
 
-    public abstract String getValue();
+    SeasonTwo(String expectedVisitor){
+        this.expectedVisitor = expectedVisitor;
+    }
+
+    public String getExpectedVisitor() {
+        return expectedVisitor;
+    }
 }
