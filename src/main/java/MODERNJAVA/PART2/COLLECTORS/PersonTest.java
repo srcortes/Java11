@@ -3,14 +3,14 @@ package MODERNJAVA.PART2.COLLECTORS;
 
 import static java.util.stream.Collectors.*;
 
-import MODERNJAVA.PART2.COLLECTORS.PRIMENUMBER.PrimeNumberCollector;
-import java.sql.SQLOutput;
+import MODERNJAVA.PART2.COLLECTORS.CUSTOMERCOLLECTOR.CountStringCollector;
+import MODERNJAVA.PART2.COLLECTORS.CUSTOMERCOLLECTOR.PrimeNumberCollector;
+import MODERNJAVA.PART2.COLLECTORS.CUSTOMERCOLLECTOR.StringNameCollector;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import javax.sound.midi.Soundbank;
 
 public class PersonTest {
     public static void main(String[] args) {
@@ -203,7 +203,6 @@ public class PersonTest {
 
         List<Department> list = personsList.stream()
             .map(Persons::getDepartment)
-            .distinct()
             .collect(new ToListCollector<>());
         System.out.println(list);
 
@@ -212,7 +211,14 @@ public class PersonTest {
             .collect(new ToArraysCollector<>());
         System.out.println(Arrays.toString(deparment));
 
-        System.out.println(partitionPrimesWithCustomCollector(10));
+        System.out.println(partitionPrimesWithCustomCollector(1));
+
+        List<String> pruebaString = List.of("John", "July", "Juan", "John", "Juan");
+        List<String> a = pruebaString.stream().collect(new StringNameCollector());
+        Map<String, Integer> b = pruebaString.stream().collect(new CountStringCollector());
+        System.out.println(a);
+        System.out.println(b);
+
 
 
 
@@ -220,7 +226,6 @@ public class PersonTest {
     
     /**METHOD TO EVALUATE WITHIN A RANGE OF NUMBER WHETER A NUMBER IS PRIME OR NOT**/
     public static Map<Boolean, List<Integer>> partitionPrimes(int n){
-
         return IntStream.rangeClosed(2, n).boxed().collect(partitioningBy(candidate->isPrime(candidate)));
     }
 
@@ -234,4 +239,6 @@ public class PersonTest {
     public static Map<Boolean, List<Integer>> partitionPrimesWithCustomCollector(int n){
         return IntStream.rangeClosed(2, n).boxed().collect(new PrimeNumberCollector());
     }
+
+
 }

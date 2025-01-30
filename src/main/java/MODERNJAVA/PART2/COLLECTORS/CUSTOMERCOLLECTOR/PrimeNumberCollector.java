@@ -1,4 +1,4 @@
-package MODERNJAVA.PART2.COLLECTORS.PRIMENUMBER;
+package MODERNJAVA.PART2.COLLECTORS.CUSTOMERCOLLECTOR;
 
 
 
@@ -14,6 +14,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
+
 
 public class PrimeNumberCollector implements Collector<Integer, Map<Boolean, List<Integer>>,
     Map<Boolean, List<Integer>>>{
@@ -42,17 +43,15 @@ public class PrimeNumberCollector implements Collector<Integer, Map<Boolean, Lis
   public Function<Map<Boolean, List<Integer>>, Map<Boolean, List<Integer>>> finisher() {
     return Function.identity();
   }
-
   @Override
   public Set<Characteristics> characteristics() {
 
     return Collections.unmodifiableSet(EnumSet.of(Characteristics.IDENTITY_FINISH));
   }
-
   public static boolean isPrimeV1(List<Integer> primes, int candidate){
     int candidateRoot = (int) Math.sqrt(candidate);
     return primes.stream().takeWhile(i->i <= candidateRoot)
+        .peek(i->System.out.println("i: "+i))
         .noneMatch(i->candidate % i == 0);
-
   }
 }
