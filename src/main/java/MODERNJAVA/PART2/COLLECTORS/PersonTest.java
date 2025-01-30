@@ -214,8 +214,9 @@ public class PersonTest {
         System.out.println(partitionPrimesWithCustomCollector(1));
 
         List<String> pruebaString = List.of("John", "July", "Juan", "John", "Juan");
+        List<String> list1 =   List.of("Hello", "Hello", "Piece", "Bad", "Bad", "Bad", "Piece", "Hello", "Bad");
         List<String> a = pruebaString.stream().collect(new StringNameCollector());
-        Map<String, Integer> b = pruebaString.stream().collect(new CountStringCollector());
+        Map<String, Integer> b = list1.stream().collect(new CountStringCollector());
         System.out.println(a);
         System.out.println(b);
 
