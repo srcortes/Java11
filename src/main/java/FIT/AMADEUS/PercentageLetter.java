@@ -33,6 +33,7 @@ public class PercentageLetter {
     list1.addAll(list2);
     Map<String, Long> map = list1.stream()
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    System.out.println(map);
     map.values().removeIf(i -> i != 2);
     return (int) map.entrySet().stream().count();
   }

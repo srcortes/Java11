@@ -32,17 +32,18 @@ import static java.util.stream.Stream.concat;
 public class GeneralExample {
 
   public static void main(String[] args) throws Exception {
-    Map<Integer, String> map = new HashMap<>();
+    final Map<Integer, String> map = new HashMap<>();
     map.put(80217780, "John");
-
-    Integer value = map.entrySet().stream()
-        .filter(i -> i.getValue().equalsIgnoreCase("John"))
-        .map(Map.Entry::getKey)
-        .findAny()
-        .orElse(null);
+    verify(map);
+    System.out.println(map);
 
 
 
+  }
+
+  public static Map<Integer, String> verify(Map<Integer, String> map){
+    map.put(63545795, "July");
+    return map;
 
   }
 
