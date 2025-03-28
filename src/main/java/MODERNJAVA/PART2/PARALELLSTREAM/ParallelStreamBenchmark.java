@@ -1,30 +1,40 @@
 package MODERNJAVA.PART2.PARALELLSTREAM;
 
 
+import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
+
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx4G"})
+@State(Scope.Benchmark)
 public class ParallelStreamBenchmark {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws RunnerException {
+    Options opt = new OptionsBuilder()
+            .include(ParallelStreamBenchmark.class.getSimpleName())
+            .build();
 
+    new Runner(opt).run();
   }
 
-  public static void InitialVersionSum(){
-    System.out.println(start());
-
-  }
   private static final long N = 10_000_000L;
 
-  private static long start(){
-    long tiempoEnMilisegundos = System.currentTimeMillis();
-    return tiempoEnMilisegundos / 1000;
+  @Benchmark
+  public long sequentialSum(){
+    return Stream.iterate(1L, i -> i + 1)
+            .limit(N)
+            .reduce(0L, Long::sum);
   }
 
-  private long end(){
-    long tiempoEnMilisegundos = System.currentTimeMillis();
-    return tiempoEnMilisegundos / 1000;
+  @TearDown(Level.Invocation)
+  public void tearDown(){
+    System.gc();
   }
-
-
-
-
 }

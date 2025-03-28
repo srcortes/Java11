@@ -31,22 +31,18 @@ import static java.util.stream.Stream.concat;
 
 public class GeneralExample {
 
-  public static void main(String[] args) throws Exception {
-    final Map<Integer, String> map = new HashMap<>();
-    map.put(80217780, "John");
-    verify(map);
-    System.out.println(map);
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("5");
+        list.add("6");
 
+        list.stream().mapToInt(Integer::parseInt).distinct().forEach(System.out::println);
 
-
-  }
-
-  public static Map<Integer, String> verify(Map<Integer, String> map){
-    map.put(63545795, "July");
-    return map;
-
-  }
-
-
+    }
 
 }

@@ -2,146 +2,126 @@ package FIT;
 
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-@FunctionalInterface
-interface CreateObject<Name, Id, Members> {
-    Members apply(Name name, Id id);
+class Node{
+    public Node next = null;
+    public String data;
+
+    public Node(String data) {
+        this.data = data;
+    }
+
+    public void addNode(String data){
+        Node newNode = new Node(data);
+        Node current = this;
+
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+
+    public Node deleteNode(Node head, String data){
+        Node current = head;
+
+        if (current.data.equals(data)) {
+            return current.next;
+        }
+
+        while(current.next != null){
+            if (current.next.data.equals(data)) {
+                current.next = current.next.next;
+                return head;
+            }
+            current = current.next;
+        }
+        return head;
+    }
+
+    public List<String> printNodes(){
+        Node current = this;
+        List<String> list = new ArrayList<>();
+        while (current != null) {
+            list.add(current.data);
+            current = current.next;
+        }
+
+        return list;
+    }
+
+    public void createCycle(Node targetNode) {
+        Node current = this;
+
+        // Traverse to the end of the list
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        // Point the last node to the target node to create a cycle
+
+        current.next = targetNode;
+
+    }
 }
-
-class Members {
-    private String name;
-    private Integer Id;
-
-    public Members(String name, Integer id) {
-        this.name = name;
-        Id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return Id;
-    }
-
-    public void setId(Integer id) {
-        Id = id;
-    }
-}
-
-class NodeTest {
-    Members datos;
-    Members anteriorNodo;
-    NodeTest siguienteNodo;
-
-    NodeTest(Members objeto) {
-        this(objeto, null, null);
-    }
-
-    NodeTest(Members objeto, NodeTest nodo, NodeTest nodoAnt) {
-        datos = objeto;
-        siguienteNodo = nodo;
-
-    }
-
-    Object obtenerObject() {
-        return datos;
-    }
-
-    NodeTest obtenerSiguiente() {
-        return siguienteNodo;
-    }
-}
-
-
 
 public class FitGlobant {
-    static NodeTest firstNode;
-
-    static NodeTest lastNode;
-
-    static List<Members>  list;
-
-    public static void evaluateList(List<Members> list) {
-        list.forEach(value ->{
-            insertFront(value);
-        });
-
-        print();
-
-    }
-
-    public static List<Members> CreateList(Supplier<List<Members>> listSupplier) {
-        return listSupplier.get();
-    }
-
-    public static void insertFront(Members members) {
-        if (listEmpty())
-            firstNode = lastNode = new NodeTest(members);
-        else
-            firstNode = firstNode.siguienteNodo = new NodeTest(members);
-    }
-
-    public static Members CreateObjectFamily(String name,Integer id,
-                                            CreateObject<String, Integer, Members> createFamily){
-        return createFamily.apply(name, id);
-
-    }
-
-    public static void PrintInfo(String value, Consumer<String> consumer){
-        consumer.accept(value);
-    }
-
-    public static boolean listEmpty() {
-        return firstNode == null;
-    }
-
-    public static void print() {
-
-        NodeTest previous = firstNode;
-        NodeTest next = firstNode;
-
-
-        while (next.siguienteNodo != null) {
-
-            if (previous.anteriorNodo != null) {
-
-            } else if (next.siguienteNodo != null) {
-                System.out.print(next.siguienteNodo.datos + " ");
-                next = next.siguienteNodo;
-            }
-
-            System.out.println("....");
-
-        }
-    }
-
-
 
     public static void main(String[] args) {
-        Members membersOne = FitGlobant.CreateObjectFamily("John Rodriguez", 40, Members::new);
-        Members membersTwo = FitGlobant.CreateObjectFamily("July Mora", 40, Members::new);
+        Node node = new Node("A");
+        node.addNode("B");
+        node.addNode("C");
+        node.addNode("B");
+        node.addNode("E");
+        node.addNode("F");
 
-        list = FitGlobant.CreateList(ArrayList::new);
-        list.add(membersOne);
-        list.add(membersTwo);
-        list.sort(Comparator.comparing(Members::getName));
+        //node.createCycle(node);
+
+        Map<String, Long> map = node.printNodes().stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println(map);
 
 
-        FitGlobant.evaluateList(list);
+        map.entrySet().stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(entry -> entry.getKey())
+                .peek(System.out::println)
+                .forEach(i -> node.deleteNode(node, i));
+        System.out.println(node.printNodes());
+       String val  = node.printNodes().get((node.printNodes().size() - 1) / 2);
+       node.deleteNode(node, val);
+        System.out.println(node.printNodes());
+
+        Node slow = node;
+        Node fast = node;
+        while(fast != null && fast.next != null) {
+            System.out.println("...");
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast) {
+                System.out.println("Loop detected" + slow.data);
+                break;
+            }
+        }
+
+        Stream.iterate(new char[]{'A'}, j -> new char[]{(char) (j[0] + 1)})
+                .limit(26)
+                .forEach(System.out::println);
 
 
+
+
+
+
+
+        //node.deleteNode(node, "C");
+        //node.printNodes();
     }
 
-    }
+}
 
 

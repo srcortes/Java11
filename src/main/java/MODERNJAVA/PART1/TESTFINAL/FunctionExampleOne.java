@@ -1,5 +1,6 @@
 package MODERNJAVA.PART1.TESTFINAL;
 
+
 import java.util.*;
 import java.util.function.*;
 
@@ -320,7 +321,7 @@ public class FunctionExampleOne {
         /**
          * BiFunction it is a functional that receive two arguments and return the specific value
          */
-        List<String> words = List.of("Piece", "Hello", "Piece", "Bad", "Bad", "Bad", "John");
+        List<String> words =Arrays.asList("Piece", "Hello", "Piece", "Bad", "Bad", "Bad", "John");
 
         Supplier<Map<String, Integer>> supplier = HashMap::new;
 

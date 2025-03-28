@@ -1,6 +1,6 @@
 package FIT;
 
-import com.sun.jdi.IntegerValue;
+
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class NewFitGlobant {
 
     static List<String> words =
-            List.of("Hello", "Hello", "Piece", "Bad", "Bad", "Bad", "John");
+            Arrays.asList("Hello", "Hello", "Piece", "Bad", "Bad", "Bad", "John");
 
 
     public static void print(Map map, Consumer<Map> consumer) {
