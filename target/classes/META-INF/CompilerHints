@@ -3,5 +3,9 @@ dontinline,*.*_avgt_jmhStub
 dontinline,*.*_sample_jmhStub
 dontinline,*.*_ss_jmhStub
 dontinline,*.*_thrpt_jmhStub
+inline,MODERNJAVA/PART2/GeneralExample2.firtsVersion
+inline,MODERNJAVA/PART2/PARALELLSTREAM/ParallelStreamBenchmark.iterativeSum
+inline,MODERNJAVA/PART2/PARALELLSTREAM/ParallelStreamBenchmark.rangeSum
+inline,MODERNJAVA/PART2/PARALELLSTREAM/ParallelStreamBenchmark.rangeSumParallel
 inline,MODERNJAVA/PART2/PARALELLSTREAM/ParallelStreamBenchmark.sequentialSum
 inline,MODERNJAVA/PART2/PARALELLSTREAM/ParallelStreamBenchmark.tearDown
