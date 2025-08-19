@@ -58,7 +58,7 @@ public class BatchSpliterator implements Spliterator<List<String>> {
 
         Spliterator<List<String>> spliterator = new BatchSpliterator(bigList, 2);
 
-        StreamSupport.stream(spliterator, true)
+        StreamSupport.stream(spliterator, false)
                 .forEach(batch -> System.out.println("Batch: " + batch));
     }
 }
