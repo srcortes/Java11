@@ -32,29 +32,28 @@ public class ReverseStringSplit implements Spliterator<String> {
     @Override
     public Spliterator<String> trySplit() {
 
-        System.out.println("******* TrySplit ******");
+     
         int remaining = str.length() - currentPos;
-
-
-        if (remaining < 3) return null; // Only split if enough left
+        if (remaining < chunkSize * 2) return null; // Only split if enough left
         int splitPoint = currentPos + remaining / 2;
-        ReverseStringSplit split = new ReverseStringSplit(str, chunkSize);
+        ReverseStringSplit split = new ReverseStringSplit(str.substring(currentPos, splitPoint), chunkSize);
         this.currentPos = splitPoint;
         return split;
     }
 
     @Override
     public long estimateSize() {
-        return 0;
+        return str.length() - currentPos;
     }
 
     @Override
     public int characteristics() {
-        return 0;
+        return ORDERED + SIZED + SUBSIZED + NONNULL + IMMUTABLE;
     }
 
     public static void main(String[] args) {
-        ReverseStringSplit reverseStringSplit = new ReverseStringSplit("John Jairo", 4);
+        String chain = "John Jairo";
+        ReverseStringSplit reverseStringSplit = new ReverseStringSplit(chain, 2);
 
        StreamSupport.stream(reverseStringSplit, true)
                .forEach(System.out::println);

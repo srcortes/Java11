@@ -31,7 +31,7 @@ public class BatchSpliterator implements Spliterator<List<String>> {
     public Spliterator<List<String>> trySplit() {
         System.out.println("******* TrySplit ******");
         int remaining = source.size() - current;
-        System.out.println(remaining);
+
 
         if (remaining <= batchSize * 2) return null; // Only split if enough left
         int splitPoint = current + remaining / 2;
@@ -58,7 +58,7 @@ public class BatchSpliterator implements Spliterator<List<String>> {
 
         Spliterator<List<String>> spliterator = new BatchSpliterator(bigList, 2);
 
-        StreamSupport.stream(spliterator, false)
+        StreamSupport.stream(spliterator, true)
                 .forEach(batch -> System.out.println("Batch: " + batch));
     }
 }
